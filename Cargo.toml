@@ -1,0 +1,17 @@
+[package]
+name = "sigmaos-drivers"
+version = "0.1.0"
+edition = "2021"
+authors = ["SigmaOS Project"]
+description = "Hardware driver management framework"
+license = "GPL-3.0-or-later"
+repository = "https://github.com/AaryanSinghChauhan09/SigmaOS-drivers"
+readme = "README.md"
+keywords = ["driver", "hardware", "kernel"]
+categories = ["hardware-support"]
+
+[dependencies]
+sigmaos-kernel = { version = "0.1", path = "../SigmaOS-kernel" }
+
+[profile.release]
+opt-level = 3
