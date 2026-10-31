@@ -1,15 +1,14 @@
-# SigmaOS-drivers
+# SigmaOS Drivers
 
-Part of the SigmaOS multi-repository architecture.
+This crate exports a `DriverManager` and a broad collection of driver and
+device-model modules. Their presence in source does not establish that a driver
+is safe, complete, or validated against physical hardware. The repository
+depends on the sibling `SigmaOS-kernel` checkout through a local path.
 
-## Principles
-- MODULARITY: Single responsibility per repository
-- LOOSE COUPLING: Minimal dependencies between repos
-- INTERFACE SEGREGATION: Clear, focused public APIs
-- DETERMINISTIC TESTING: Comprehensive test coverage
+Before enabling a driver on a machine, document its supported device IDs,
+hardware and emulator evidence, failure behavior, and privilege boundary.
+Module-level or model tests alone are not hardware validation.
 
 ## License
-SPDX-License-Identifier: GPL-3.0-or-later
 
-## Copyright
-Copyright (C) 2026 SigmaOS Project
+GPL-3.0-or-later. See [`LICENSE`](LICENSE) and [`Cargo.toml`](Cargo.toml).
