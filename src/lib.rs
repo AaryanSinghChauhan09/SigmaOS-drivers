@@ -1,7 +1,12 @@
-//! SigmaOS Drivers
-//! Hardware driver management
+use anyhow::Result;
+use serde::Serialize;
 
-pub mod driver;
-pub mod drivers;
+#[derive(Debug, Clone, Serialize)]
+pub struct Config { pub enabled: bool }
+impl Default for Config { fn default() -> Self { Self { enabled: true } } }
 
-pub use driver::DriverManager;
+pub struct drivers { config: Config }
+impl drivers {
+    pub fn new(config: Config) -> Self { Self { config } }
+    pub fn initialize(&mut self) -> Result<()> { Ok(()) }
+}
