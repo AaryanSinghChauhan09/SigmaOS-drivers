@@ -1,0 +1,8 @@
+[component]
+name = "SigmaOS-drivers"
+version = "0.1.0"
+maturity = "alpha"
+tier = 2
+owner = "SigmaOS Team"
+purpose = "Kernel driver management and hardware driver lifecycle"
+dependencies = ["SigmaOS-hardware", "SigmaOS-kernel"]
