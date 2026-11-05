@@ -1,21 +1,9 @@
 [package]
-name = "sigmaos-drivers"
+name = "sigmaos_drivers"
 version = "0.1.0"
 edition = "2021"
-authors = ["SigmaOS Team"]
-license = "MIT OR Apache-2.0"
-description = "SigmaOS drivers component - kernel driver management and hardware driver lifecycle"
+description = "Hardware drivers collection (AHCI, NVMe, GOP graphics fallback, 16550 serial, VirtIO)"
 
-[[bin]]
-name = "sigmaos-drivers"
-path = "src/main.rs"
-
-[dependencies]
-anyhow = "1.0"
-thiserror = "1.0"
-log = "0.4"
-env_logger = "0.10"
-serde = { version = "1.0", features = ["derive"] }
-toml = "0.8"
-
-[dev-dependencies]
+[lib]
+name = "sigmaos_drivers"
+path = "src/lib.rs"

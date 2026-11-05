@@ -1,8 +1,16 @@
 [component]
 name = "SigmaOS-drivers"
-version = "0.1.0"
-maturity = "alpha"
-tier = 2
-owner = "SigmaOS Team"
-purpose = "Kernel driver management and hardware driver lifecycle"
-dependencies = ["SigmaOS-hardware", "SigmaOS-kernel"]
+tier = 1
+stability = "scaffold"
+language = "rust"
+description = "Hardware drivers collection (AHCI, NVMe, GOP graphics fallback, 16550 serial, VirtIO)"
+upstream = ["https://github.com/torvalds/linux/tree/master/drivers"]
+
+[contract]
+provides = ["block-drivers", "display-fallback-drivers", "serial-console-drivers"]
+depends_on = []
+
+[maturity]
+status = "Scaffold"
+test_evidence = "Compiles and passes AAA unit tests"
+next_milestone = "Hardware and runtime integration"

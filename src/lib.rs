@@ -1,38 +1,38 @@
-pub mod config;
-pub mod driver_manager;
-pub mod error;
-pub mod service;
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum DriverType { StorageBlock, VideoGop, SerialUart, NetworkInterface }
 
-pub use config::Config;
-pub use driver_manager::{Driver, DriverManager, DriverState};
-pub use error::{ComponentError, Result};
-pub use service::{Service, ServiceStatus};
-
-pub trait Component {
-    fn name(&self) -> &str;
-    fn version(&self) -> &str;
-    fn initialize(&mut self) -> error::Result<()>;
-    fn shutdown(&mut self) -> error::Result<()>;
-    fn health_check(&self) -> error::Result<()>;
+#[derive(Debug)]
+pub struct DriverEntry {
+    pub name: String,
+    pub driver_type: DriverType,
+    pub initialized: bool,
 }
 
-pub struct DriversComponent {
-    service: service::Service,
+#[derive(Debug, Default)]
+pub struct DriversCollection {
+    drivers: Vec<DriverEntry>,
 }
 
-impl DriversComponent {
-    pub fn new(config: Config) -> Self {
-        Self { service: service::Service::new(config) }
+impl DriversCollection {
+    pub fn new() -> Self { Self::default() }
+    pub fn register(&mut self, name: &str, dt: DriverType) {
+        self.drivers.push(DriverEntry {
+            name: name.to_string(),
+            driver_type: dt,
+            initialized: true,
+        });
     }
+    pub fn count(&self) -> usize { self.drivers.len() }
 }
 
-impl Component for DriversComponent {
-    fn name(&self) -> &str { "sigmaos-drivers" }
-    fn version(&self) -> &str { env!("CARGO_PKG_VERSION") }
-    fn initialize(&mut self) -> error::Result<()> { self.service.start() }
-    fn shutdown(&mut self) -> error::Result<()> { self.service.stop() }
-    fn health_check(&self) -> error::Result<()> {
-        if self.service.is_running() { Ok(()) }
-        else { Err(error::ComponentError::Service("drivers service not running".to_string())) }
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn test_driver_collection_registration() {
+        let mut col = DriversCollection::new();
+        col.register("nvme-driver", DriverType::StorageBlock);
+        col.register("gop-driver", DriverType::VideoGop);
+        assert_eq!(col.count(), 2);
     }
 }
