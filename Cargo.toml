@@ -2,7 +2,8 @@
 name = "sigmaos_drivers"
 version = "0.1.0"
 edition = "2021"
-description = "Hardware drivers collection (AHCI, NVMe, GOP graphics fallback, 16550 serial, VirtIO)"
+license = "MIT"
+description = "SigmaOS drivers component inspired by Linux Mint / Omarchy / Arch Linux."
 
 [lib]
 name = "sigmaos_drivers"
