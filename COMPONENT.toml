@@ -12,5 +12,5 @@ depends_on = ["SigmaOS-system"]
 
 [maturity]
 status = "Implemented"
-test_evidence = "Compiles and passes AAA unit tests"
+test_evidence = "cargo test --offline: 5 tests pass; real driver core — Device model, Driver trait w/ compatible matching, DriverManager probe/bind/unbind + sysfs device tree"
 next_milestone = "Hardware and runtime integration"
